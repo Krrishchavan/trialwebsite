@@ -17,5 +17,56 @@
             <ul id="task-list"></ul>
         </main>
     </div>
+    <script>
+        // script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const taskInput = document.getElementById('task-input');
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const taskList = document.getElementById('task-list');
+
+    // Function to add a new task
+    const addTask = () => {
+        const taskText = taskInput.value.trim();
+
+        if (taskText === '') {
+            alert('Please enter a task!');
+            return;
+        }
+
+        // Create a new list item
+        const listItem = document.createElement('li');
+        listItem.textContent = taskText;
+
+        // Add a delete button to the task
+        const deleteBtn = document.createElement('span');
+        deleteBtn.textContent = '❌';
+        deleteBtn.style.marginLeft = '10px';
+
+        // Add delete functionality
+        deleteBtn.addEventListener('click', () => {
+            taskList.removeChild(listItem);
+        });
+
+        // Append delete button to the list item
+        listItem.appendChild(deleteBtn);
+
+        // Add the new task to the task list
+        taskList.appendChild(listItem);
+
+        // Clear the input field
+        taskInput.value = '';
+    };
+
+    // Event listener for adding a task
+    addTaskBtn.addEventListener('click', addTask);
+
+    // Allow adding tasks by pressing Enter
+    taskInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    });
+});
+    </script>
 </body>
 </html>
