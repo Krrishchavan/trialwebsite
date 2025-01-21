@@ -4,7 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List App</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS for To-Do App */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .app-container {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            background: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul li span {
+            cursor: pointer;
+            color: #dc3545;
+        }
+
+        ul li span:hover {
+            color: #c82333;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -17,56 +93,57 @@
             <ul id="task-list"></ul>
         </main>
     </div>
+
     <script>
-        // script.js
-document.addEventListener('DOMContentLoaded', () => {
-    const taskInput = document.getElementById('task-input');
-    const addTaskBtn = document.getElementById('add-task-btn');
-    const taskList = document.getElementById('task-list');
+        // JavaScript for To-Do App
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskInput = document.getElementById('task-input');
+            const addTaskBtn = document.getElementById('add-task-btn');
+            const taskList = document.getElementById('task-list');
 
-    // Function to add a new task
-    const addTask = () => {
-        const taskText = taskInput.value.trim();
+            // Function to add a new task
+            const addTask = () => {
+                const taskText = taskInput.value.trim();
 
-        if (taskText === '') {
-            alert('Please enter a task!');
-            return;
-        }
+                if (taskText === '') {
+                    alert('Please enter a task!');
+                    return;
+                }
 
-        // Create a new list item
-        const listItem = document.createElement('li');
-        listItem.textContent = taskText;
+                // Create a new list item
+                const listItem = document.createElement('li');
+                listItem.textContent = taskText;
 
-        // Add a delete button to the task
-        const deleteBtn = document.createElement('span');
-        deleteBtn.textContent = '❌';
-        deleteBtn.style.marginLeft = '10px';
+                // Add a delete button to the task
+                const deleteBtn = document.createElement('span');
+                deleteBtn.textContent = '❌';
+                deleteBtn.style.marginLeft = '10px';
 
-        // Add delete functionality
-        deleteBtn.addEventListener('click', () => {
-            taskList.removeChild(listItem);
+                // Add delete functionality
+                deleteBtn.addEventListener('click', () => {
+                    taskList.removeChild(listItem);
+                });
+
+                // Append delete button to the list item
+                listItem.appendChild(deleteBtn);
+
+                // Add the new task to the task list
+                taskList.appendChild(listItem);
+
+                // Clear the input field
+                taskInput.value = '';
+            };
+
+            // Event listener for adding a task
+            addTaskBtn.addEventListener('click', addTask);
+
+            // Allow adding tasks by pressing Enter
+            taskInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    addTask();
+                }
+            });
         });
-
-        // Append delete button to the list item
-        listItem.appendChild(deleteBtn);
-
-        // Add the new task to the task list
-        taskList.appendChild(listItem);
-
-        // Clear the input field
-        taskInput.value = '';
-    };
-
-    // Event listener for adding a task
-    addTaskBtn.addEventListener('click', addTask);
-
-    // Allow adding tasks by pressing Enter
-    taskInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            addTask();
-        }
-    });
-});
     </script>
 </body>
 </html>
